@@ -1,25 +1,25 @@
 #include "gae.h"
 
-gae_nineslice_t* gae_nineslice_init(gae_nineslice_t* nineslice, unsigned int dimx[4], unsigned int dimy[4], gae_graphics_texture_t* const texture)
+gae_nineslice_t* gae_nineslice_init(gae_nineslice_t* nineslice, gae_nineslice_dims_t* const dims, gae_graphics_texture_t* const texture)
 {
 	unsigned int i;
-	unsigned int pX = dimx[GAE_NINESLICE_U];
-	unsigned int pL = dimx[GAE_NINESLICE_L];
-	unsigned int pR = dimx[GAE_NINESLICE_R];
-	unsigned int pW = dimx[GAE_NINESLICE_W];
+	unsigned int pX = dims->x[GAE_NINESLICE_U];
+	unsigned int pL = dims->x[GAE_NINESLICE_L];
+	unsigned int pR = dims->x[GAE_NINESLICE_R];
+	unsigned int pW = dims->x[GAE_NINESLICE_W];
 	
 	unsigned int wX = pL - pX;
 	unsigned int wL = pR - wX;
-	unsigned int wR = pW - pR - pX;
+	unsigned int wR = pW - (pR - pX);
 	
-	unsigned int pY = dimy[GAE_NINESLICE_V];
-	unsigned int pT = dimy[GAE_NINESLICE_T];
-	unsigned int pB = dimy[GAE_NINESLICE_B];
-	unsigned int pH = dimy[GAE_NINESLICE_H];
+	unsigned int pY = dims->y[GAE_NINESLICE_V];
+	unsigned int pT = dims->y[GAE_NINESLICE_T];
+	unsigned int pB = dims->y[GAE_NINESLICE_B];
+	unsigned int pH = dims->y[GAE_NINESLICE_H];
 	
 	unsigned int hY = pT - pY;
 	unsigned int hT = pB - hY;
-	unsigned int hB = pH - pB - pY;
+	unsigned int hB = pH - (pB - pY);
 	
 	nineslice->texture = texture;
 	
@@ -30,56 +30,73 @@ gae_nineslice_t* gae_nineslice_init(gae_nineslice_t* nineslice, unsigned int dim
 		frame->texture = nineslice->texture;
 		switch (i) {
 			case gae_nineslice_top_left: {
-				frame->src.x = pX; frame->src.y = pY;
-				frame->src.w = wX; frame->src.h = hY;
+				frame->src.x = pX; 	frame->src.y = pY;
+				frame->src.w = wX; 	frame->src.h = hY;
+				rect->x = pX - pX; 	rect->y = pY - pY;
+				rect->w = wX; 		rect->h = hY;
 			};
 			break;
 			case gae_nineslice_top: {
-				frame->src.x = pL; frame->src.y = pY;
-				frame->src.w = wL; frame->src.h = hY;
+				frame->src.x = pL; 	frame->src.y = pY;
+				frame->src.w = wL; 	frame->src.h = hY;
+				rect->x = pL - pX; 	rect->y = pY - pY;
+				rect->w = wL; 		rect->h = hY;
 			};
 			break;
 			case gae_nineslice_top_right: {
-				frame->src.x = pR; frame->src.y = pY;
-				frame->src.w = wR; frame->src.h = hY;
+				frame->src.x = pR; 	frame->src.y = pY;
+				frame->src.w = wR; 	frame->src.h = hY;
+				rect->x = pR - pX; 	rect->y = pY - pY;
+				rect->w = wR; 		rect->h = hY;
 			};
 			break;
 			
 			case gae_nineslice_centre_left: {
-				frame->src.x = pX; frame->src.y = pT;
-				frame->src.w = wX; frame->src.h = hT;
+				frame->src.x = pX; 	frame->src.y = pT;
+				frame->src.w = wX; 	frame->src.h = hT - pY;
+				rect->x = pX - pX; 	rect->y = pT - pY;
+				rect->w = wX; 		rect->h = hT - pY;
 			};
 			break;
 			case gae_nineslice_centre: {
-				frame->src.x = pL; frame->src.y = pT;
-				frame->src.w = wL; frame->src.h = hT;
+				frame->src.x = pL; 	frame->src.y = pT;
+				frame->src.w = wL; 	frame->src.h = hT - pY;
+				rect->x = pL - pX; 	rect->y = pT - pY;
+				rect->w = wL; 		rect->h = hT - pY;
 			};
 			break;
 			case gae_nineslice_centre_right: {
-				frame->src.x = pR; frame->src.y = pT;
-				frame->src.w = wR; frame->src.h = hT;
+				frame->src.x = pR; 	frame->src.y = pT;
+				frame->src.w = wR; 	frame->src.h = hT - pY;
+				rect->x = pR - pX; 	rect->y = pT - pY;
+				rect->w = wR; 		rect->h = hT - pY;
 			};
 			break;
 			
 			case gae_nineslice_bottom_left: {
-				frame->src.x = pX; frame->src.y = pB;
-				frame->src.w = wX; frame->src.h = hB;
+				frame->src.x = pX; 	frame->src.y = pB;
+				frame->src.w = wX; 	frame->src.h = hB - pY;
+				rect->x = pX - pX; 	rect->y = pB - pY;
+				rect->w = wX; 		rect->h = hB - pY;
 			};
 			break;
 			case gae_nineslice_bottom: {
-				frame->src.x = pL; frame->src.y = pB;
-				frame->src.w = wL; frame->src.h = hB;
+				frame->src.x = pL; 	frame->src.y = pB;
+				frame->src.w = wL; 	frame->src.h = hB - pY;
+				rect->x = pL - pX; 	rect->y = pB - pY;
+				rect->w = wL; 		rect->h = hB - pY;
 			};
 			break;
 			case gae_nineslice_bottom_right: {
-				frame->src.x = pR; frame->src.y = pB;
-				frame->src.w = wR; frame->src.h = hB;
+				frame->src.x = pR; 	frame->src.y = pB;
+				frame->src.w = wR; 	frame->src.h = hB - pY;
+				rect->x = pR - pX; 	rect->y = pB - pY;
+				rect->w = wR; 		rect->h = hB - pY;
 			};
 			break;
+			default:
+			break;
 		};
-		
-		rect->x = frame->src.x; rect->y = frame->src.y;
-		rect->w = frame->src.w; rect->h = frame->src.h;
 	}
 	
 	nineslice->dst.x = 0; nineslice->dst.y = 0;

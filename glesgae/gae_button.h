@@ -5,8 +5,8 @@
 #include "gae_rect.h"
 
 enum gae_button_state
-{	gae_button_active = 0
-,	gae_button_inactive
+{	gae_button_inactive = 0
+,	gae_button_active
 ,	gae_button_hover
 ,	gae_button_pressed
 ,	gae_button_state_count

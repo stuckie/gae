@@ -88,9 +88,11 @@ typedef struct nineslice_button_s {
 static void OnButtonNinesliceRender(void* data)
 {
 	nineslice_button_t* ninesliceButton = data;
+	gae_nineslice_resize(&ninesliceButton->nineslice, ninesliceButton->dims->w, ninesliceButton->dims->h);
+	
 	ninesliceButton->nineslice.dst.x = ninesliceButton->dims->x;
 	ninesliceButton->nineslice.dst.y = ninesliceButton->dims->y;
-	gae_nineslice_resize(&ninesliceButton->nineslice, ninesliceButton->dims->w, ninesliceButton->dims->h);
+	
 	gae_nineslice_render(&ninesliceButton->nineslice);
 }
 
@@ -99,6 +101,7 @@ gae_button_renderable_t* gae_button_create_nineslice(gae_button_t* button, gae_b
 	nineslice_button_t* ninesliceButton = gae_alloc(sizeof(nineslice_button_t));
 	ninesliceButton->nineslice = *nineslice;
 	ninesliceButton->dims = &button->dims;
+	gae_nineslice_resize(&ninesliceButton->nineslice, button->dims.w, button->dims.h);
 	
 	renderable->data = ninesliceButton;
 	renderable->onRender = OnButtonNinesliceRender;

@@ -69,14 +69,13 @@ static void SetupNineslice(int _x, int _y, int _w, int _h, gae_graphics_texture_
 	
 	for (i = 0; i < gae_button_state_count; ++i) {
 		gae_nineslice_t nineslice;
-		unsigned int dimx[4] = { 0, 16, 32, 48 };
-		unsigned int dimy[4];
-		dimy[0] = 0 + (i * 16);
-		dimy[1] = 16 + (i * 16);
-		dimy[2] = 32 + (i * 16);
-		dimy[3] = 48 + (i * 16);
+		gae_nineslice_dims_t dims;
+		dims.x[0] = 0;	dims.y[0] = 0 + (i * 48);
+		dims.x[1] = 16;	dims.y[1] = 16 + (i * 48);
+		dims.x[2] = 32;	dims.y[2] = 32 + (i * 48);
+		dims.x[3] = 48;	dims.y[3] = 48 + (i * 48);
 	
-		gae_nineslice_init(&nineslice, dimx, dimy, _texture);
+		gae_nineslice_init(&nineslice, &dims, _texture);
 		gae_button_create_nineslice(&GLOBAL.button[2], &graphics[i], &nineslice);
 		gae_nineslice_destroy(&nineslice);
 	}
@@ -140,7 +139,7 @@ int main(int argc, char** argv)
 	
 	ninesliceTexture = gae_alloc(sizeof(gae_graphics_texture_t));
 	gae_graphics_texture_init(ninesliceTexture);
-	gae_graphics_context_texture_load_from_file(gae_system.graphics.context, "data/window.bmp", ninesliceTexture);
+	gae_graphics_context_texture_load_from_file(gae_system.graphics.context, "data/button-nineslice.bmp", ninesliceTexture);
 	SetupNineslice(32, 192, 128, 64, ninesliceTexture);
 	
 	gae_system.event_system->onMouseEvent = OnMouseEvent;

@@ -24,10 +24,13 @@ global_t GLOBAL;
 
 static void SetupNineslice(gae_nineslice_t* _nineslice, gae_graphics_texture_t* const _texture)
 {
-	unsigned int dimx[4] = { 0, 16, 32, 48 };
-	unsigned int dimy[4] = { 0, 16, 32, 48 };
+	gae_nineslice_dims_t dims;
+	dims.x[0] = 0;	dims.y[0] = 0;
+	dims.x[1] = 16;	dims.y[1] = 16;
+	dims.x[2] = 32;	dims.y[2] = 32;
+	dims.x[3] = 48;	dims.y[3] = 48;
 	
-	gae_nineslice_init(_nineslice, dimx, dimy, _texture);
+	gae_nineslice_init(_nineslice, &dims, _texture);
 	
 	_nineslice->dst.x = 64;
 	_nineslice->dst.y = y;
