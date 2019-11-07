@@ -80,6 +80,41 @@ gae_button_renderable_t* gae_button_create_sprite(gae_button_t* const button, ga
 	return renderable;
 }
 
+typedef struct sprite_button_with_text_s {
+	sprite_button_t button;
+	gae_font_t* font;
+	
+	const char* text;
+	unsigned int offsetX;
+	unsigned int offsetY;
+	unsigned int spacing;
+} sprite_button_with_text_t;
+
+static void OnButtonSpriteWithTextRender(void* data)
+{
+	sprite_button_with_text_t* button = data;
+	OnButtonSpriteRender(&button->button);
+	gae_font_writeText(button->font, button->text, button->button.dims->x + button->offsetX, button->button.dims->y + button->offsetY, button->spacing);
+}
+
+gae_button_renderable_t* gae_button_create_sprite_with_text(gae_button_t* const button, gae_button_renderable_t* renderable, gae_frame_t* const frame, gae_font_t* font, const char* text)
+{
+	sprite_button_with_text_t* spriteButton = gae_alloc(sizeof(sprite_button_with_text_t));
+	spriteButton->button.frame = *frame;
+	spriteButton->button.dims = &button->dims;
+	spriteButton->font = font;
+	spriteButton->text = text;
+	
+	spriteButton->offsetX = 8;
+	spriteButton->offsetY = 18;
+	spriteButton->spacing = 1;
+	
+	renderable->data = spriteButton;
+	renderable->onRender = OnButtonSpriteWithTextRender;
+
+	return renderable;
+}
+
 typedef struct nineslice_button_s {
 	gae_nineslice_t nineslice;
 	gae_rect_t* dims;
@@ -105,6 +140,48 @@ gae_button_renderable_t* gae_button_create_nineslice(gae_button_t* button, gae_b
 	
 	renderable->data = ninesliceButton;
 	renderable->onRender = OnButtonNinesliceRender;
+	
+	return renderable;
+}
+
+typedef struct nineslice_button_with_text_s {
+	nineslice_button_t button;
+	gae_font_t* font;
+	
+	const char* text;
+	unsigned int offsetX;
+	unsigned int offsetY;
+	unsigned int spacing;
+} nineslice_button_with_text_t;
+
+static void OnButtonNinesliceWithTextRender(void* data)
+{
+	nineslice_button_with_text_t* button = data;
+	OnButtonNinesliceRender(&button->button);
+	
+	gae_font_writeText(	button->font
+					, 	button->text
+					,	button->button.nineslice.dst.x + button->button.nineslice.dimensions[gae_nineslice_centre].x + button->offsetX
+					,	button->button.nineslice.dst.y + button->button.nineslice.dimensions[gae_nineslice_centre].y + button->offsetY
+					,	button->spacing);
+}
+
+gae_button_renderable_t* gae_button_create_nineslice_with_text(gae_button_t* button, gae_button_renderable_t* renderable, gae_nineslice_t* const nineslice, gae_font_t* const font, const char* text)
+{
+	nineslice_button_with_text_t* ninesliceButton = gae_alloc(sizeof(nineslice_button_with_text_t));
+	ninesliceButton->button.nineslice = *nineslice;
+	ninesliceButton->button.dims = &button->dims;
+	gae_nineslice_resize(&ninesliceButton->button.nineslice, button->dims.w, button->dims.h);
+	
+	ninesliceButton->font = font;
+	ninesliceButton->text = text;
+	
+	ninesliceButton->offsetX = 0;
+	ninesliceButton->offsetY = 0;
+	ninesliceButton->spacing = 1;
+	
+	renderable->data = ninesliceButton;
+	renderable->onRender = OnButtonNinesliceWithTextRender;
 	
 	return renderable;
 }

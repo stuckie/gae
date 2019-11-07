@@ -32,7 +32,7 @@ gae_sprite_t* gae_sprite_draw(gae_sprite_t* sprite);
 /* Destroy the given sprite */
 gae_sprite_t* gae_sprite_destroy(gae_sprite_t* sprite);
 
-/* Initialise an animated sprite from the given sprite shet, using the frame rects specified, and the amount given */
+/* Initialise an animated sprite from the given sprite sheet, using the frame rects specified, and the amount given */
 gae_sprite_anim_t* gae_sprite_anim_init(gae_sprite_anim_t* sprite, gae_graphics_texture_t* const texture, gae_rect_t* const srcs, unsigned int count);
 
 /* Update the given animated sprite */

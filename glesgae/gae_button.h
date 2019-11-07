@@ -39,6 +39,8 @@ gae_button_t* gae_button_update(gae_button_t* button, gae_point_2d_t* const curs
 gae_button_t* gae_button_destroy(gae_button_t* button);
 
 gae_button_renderable_t* gae_button_create_sprite(gae_button_t* const button, gae_button_renderable_t* renderable, struct gae_frame_s* const frame);
+gae_button_renderable_t* gae_button_create_sprite_with_text(gae_button_t* const button, gae_button_renderable_t* renderable, struct gae_frame_s* const frame, struct gae_font_s* font, const char* text);
 gae_button_renderable_t* gae_button_create_nineslice(gae_button_t* const button, gae_button_renderable_t* renderable, struct gae_nineslice_s* const nineslice);
+gae_button_renderable_t* gae_button_create_nineslice_with_text(gae_button_t* const button, gae_button_renderable_t* renderable, struct gae_nineslice_s* const nineslice, struct gae_font_s* const font, const char* text);
 
 #endif

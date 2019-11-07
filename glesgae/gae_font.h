@@ -5,18 +5,19 @@
 
 struct gae_colour_rgba_s;
 struct gae_graphics_texture_s;
+struct gae_rect_s;
 
 /* very quick and dirty font */
-typedef struct gae_font_s
-{
-	gae_map_t lookup;
-	struct gae_graphics_texture_s* texture;
-	unsigned int glyphWidth;
-	unsigned int glyphHeight;
+typedef struct gae_font_s {
+	gae_map_t lookup;						/* maps hashstrings to frames */
+	struct gae_graphics_texture_s* texture;	/* pointer to texture to render frames from */
 } gae_font_t;
 
-/* Create a font based on the given texture, and a string of definitions matching the layout of the font. IE: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" */
+/* Create a font based on the given texture, and a string of definitions matching the layout of the font. IE: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" with a fixed width/height */
 gae_font_t* gae_font_init(gae_font_t* font, unsigned int width, unsigned int height, struct gae_graphics_texture_s* const texture, const char* definitions);
+
+/* Create a font based on the given texture, a string of definitions matching the order of the given array of rects describing the positions on the texture */
+gae_font_t* gae_font_init_with_sizes(gae_font_t* font, struct gae_graphics_texture_s* const texture, const char* definitions, const struct gae_rect_s* const sizeArray);
 
 /* Set the colour of this font */
 gae_font_t* gae_font_setColour(gae_font_t* font, struct gae_colour_rgba_s* const colour);

@@ -4,9 +4,7 @@
 #include "gae_hashstring.h"
 #include "gae_map.h"
 
-typedef struct gae_manager_s {
-	gae_map_t items;
-} gae_manager_t;
+typedef gae_map_t gae_manager_t;
 
 gae_manager_t* gae_manager_init(gae_manager_t* manager, unsigned int dataSize);
 
