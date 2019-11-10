@@ -64,6 +64,12 @@ typedef struct gae_keyboard_event_s {
 	unsigned int isDown;
 } gae_keyboard_event_t;
 
+/* Initialise a Pointer */
+gae_pointer_t* gae_pointer_init(gae_pointer_t* pointer);
+
+/* Initialise a Keyboard */
+gae_keyboard_t* gae_keyboard_init(gae_keyboard_t* keyboard);
+
 /* Initialise an event system with the given user data */
 gae_event_system_t* gae_event_system_init(gae_event_system_t* system, void* userDatum);
 

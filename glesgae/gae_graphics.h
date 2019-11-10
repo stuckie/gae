@@ -8,11 +8,43 @@ struct gae_rect_s;
 struct gae_buffer_s;
 struct gae_colour_rgba_s;
 
+typedef enum gae_graphics_window_flags_e
+{	GAE_WINDOW_WINDOWED				= 0
+,	GAE_WINDOW_FULLSCREEN			= 1 << 0
+,	GAE_WINDOW_OPENGL				= 1 << 1
+,	GAE_WINDOW_SHOWN				= 1 << 2
+,	GAE_WINDOW_HIDDEN				= 1 << 3
+,	GAE_WINDOW_BORDERLESS			= 1 << 4
+,	GAE_WINDOW_RESIZABLE			= 1 << 5
+,	GAE_WINDOW_MINIMISED			= 1 << 6
+,	GAE_WINDOW_MAXIMISED			= 1 << 7
+,	GAE_WINDOW_INPUT_GRABBED		= 1 << 8
+,	GAE_WINDOW_INPUT_FOCUS			= 1 << 9
+,	GAE_WINDOW_MOUSE_FOCUS			= 1 << 10
+,	GAE_WINDOW_FOREIGN				= 1 << 11
+,	GAE_WINDOW_FULLSCREEN_DESKTOP	= ( GAE_WINDOW_FULLSCREEN | 1 << 12 )
+,	GAE_WINDOW_ALLOW_HIGHDPI		= 1 << 13
+,	GAE_WINDOW_MOUSE_CAPTURE		= 1 << 14
+,	GAE_WINDOW_ALWAYS_ON_TOP		= 1 << 15
+,	GAE_WINDOW_SKIP_TASKBAR			= 1 << 16
+,	GAE_WINDOW_UTILITY				= 1 << 17
+,	GAE_WINDOW_TOOLTIP				= 1 << 18
+,	GAE_WINDOW_POPUP_MENU			= 1 << 19
+,	GAE_WINDOW_VULKAN				= 1 << 28
+} gae_graphics_window_flags;
+
+typedef enum gae_texture_flip_e
+{	GAE_TEXTURE_FLIP_NONE			= 1 << 0
+,	GAE_TEXTURE_FLIP_HORIZONTAL		= 1 << 1
+,	GAE_TEXTURE_FLIP_VERTICAL		= 1 << 2
+} gae_texture_flip;
+
 typedef struct gae_graphics_window_s {
 	void* data;
 	
 	const char* name;
 	int x, y, w, h;
+	gae_graphics_window_flags flags;
 } gae_graphics_window_t;
 
 typedef struct gae_graphics_context_s {
@@ -25,12 +57,6 @@ typedef struct gae_graphics_texture_s {
 	int w, h;
 } gae_graphics_texture_t;
 
-typedef enum gae_texture_flip_e
-{	GAE_TEXTURE_FLIP_NONE			= 1 << 0
-,	GAE_TEXTURE_FLIP_HORIZONTAL		= 1 << 1
-,	GAE_TEXTURE_FLIP_VERTICAL		= 1 << 2
-} gae_texture_flip;
-
 typedef struct gae_graphics_context_blit_params_s {
 	struct gae_graphics_texture_s* texture;
 	struct gae_rect_s* srcRect;
@@ -40,13 +66,14 @@ typedef struct gae_graphics_context_blit_params_s {
 	gae_texture_flip flip;
 } gae_graphics_context_blit_params_t;
 
-enum gae_graphics_window_flags
-{	GAE_WINDOW_FULLSCREEN
-,	GAE_WINDOW_WINDOWED
-};
-
 /* Initialise a new window with the given name at the specified position, with the given width and height, and flags */
 gae_graphics_window_t* gae_graphics_window_init(gae_graphics_window_t* window, const char* const name, int x, int y, int w, int h, unsigned int flags);
+
+/* Set Window Fullscreen status */
+gae_graphics_window_t* gae_graphics_window_set_fullscreen(gae_graphics_window_t* window, gae_graphics_window_flags flag);
+
+/* Set Window Size */
+gae_graphics_window_t* gae_graphics_window_set_size(gae_graphics_window_t* window, int w, int h);
 
 /* Destroy the given window */
 gae_graphics_window_t* gae_graphics_window_destroy(gae_graphics_window_t* window);

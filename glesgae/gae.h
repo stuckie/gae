@@ -36,6 +36,7 @@
 #include "gae_sprite.h"
 #include "gae_camera.h"
 #include "gae_button.h"
+#include "gae_slider.h"
 
 /* Maths */
 #include "gae_point.h"

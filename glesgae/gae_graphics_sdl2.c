@@ -12,6 +12,24 @@ gae_graphics_window_t* gae_graphics_window_init(gae_graphics_window_t* window, c
 	window->y = y;
 	window->w = w;
 	window->h = h;
+	window->flags = SDL_GetWindowFlags(window->data);
+	
+	return window;
+}
+
+gae_graphics_window_t* gae_graphics_window_set_fullscreen(gae_graphics_window_t* window, gae_graphics_window_flags flags)
+{
+	SDL_SetWindowFullscreen(window->data, flags);
+	window->flags = SDL_GetWindowFlags(window->data);
+	
+	return window;
+}
+
+gae_graphics_window_t* gae_graphics_window_set_size(gae_graphics_window_t* window, int w, int h)
+{
+	SDL_SetWindowSize(window->data, w, h);
+	window->w = w;
+	window->h = h;
 	
 	return window;
 }
