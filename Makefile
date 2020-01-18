@@ -41,4 +41,5 @@ bin/menutest: glesgae.a tests/menutest.c
 
 .PHONY: clean
 clean:
-	@rm -r $(GLESGAE_OBJS) >/dev/null || true
+	@rm -rf $(GLESGAE_OBJS) >/dev/null || true
+	@rm -f glesgae.a
