@@ -43,3 +43,19 @@ gae_point_2d_t gae_point2d_rotate(gae_point_2d_t* const origin, float radians, g
 	
 	return pp;
 }
+
+gae_point_2d_t* gae_point2d_scale(gae_point_2d_t* const point, float scaler)
+{
+	point->x *= scaler;
+	point->y *= scaler;
+	
+	return point;
+}
+
+gae_point_2d_t* gae_point2d_translate(gae_point_2d_t* const a, gae_point_2d_t* const b)
+{
+	a->x += b->x;
+	a->y += b->y;
+	
+	return a;
+}

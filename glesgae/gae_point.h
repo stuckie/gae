@@ -40,6 +40,12 @@ gae_point_2d_t gae_point2d_rotate(gae_point_2d_t* const origin, float radians, g
 /* returns angle between two points */
 float gae_point2d_angle_between(gae_point_2d_t* const a, gae_point_2d_t* const b);
 
+/* scales the given point with the given scaler */
+gae_point_2d_t* gae_point2d_scale(gae_point_2d_t* const point, float scaler);
+
+/* translate the given point with the given point */
+gae_point_2d_t* gae_point2d_translate(gae_point_2d_t* const a, gae_point_2d_t* const b);
+
 /* point 3d api */
 /* point 4d api */
 
