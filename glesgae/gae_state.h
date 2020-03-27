@@ -3,11 +3,13 @@
 
 typedef int (*gae_state_enter_t)(void* userData);
 typedef int (*gae_state_update_t)(void* userData);
+typedef int (*gae_state_render_t)(void* userData);
 typedef int (*gae_state_exit_t)(void* userData);
 
 typedef struct gae_state_s {
 	gae_state_enter_t onStart;
 	gae_state_update_t onUpdate;
+	gae_state_render_t onRender;
 	gae_state_exit_t onStop;
 	
 	void* userData;
