@@ -34,6 +34,13 @@ gae_graphics_window_t* gae_graphics_window_set_size(gae_graphics_window_t* windo
 	return window;
 }
 
+gae_graphics_window_t* gae_graphics_window_update(gae_graphics_window_t* window)
+{
+	SDL_UpdateWindowSurface(window->data);
+
+	return window;
+}
+
 gae_graphics_window_t* gae_graphics_window_destroy(gae_graphics_window_t* window)
 {
 	SDL_DestroyWindow(window->data);

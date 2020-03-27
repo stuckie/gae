@@ -75,6 +75,9 @@ gae_graphics_window_t* gae_graphics_window_set_fullscreen(gae_graphics_window_t*
 /* Set Window Size */
 gae_graphics_window_t* gae_graphics_window_set_size(gae_graphics_window_t* window, int w, int h);
 
+/* Update window */
+gae_graphics_window_t* gae_graphics_window_update(gae_graphics_window_t* window);
+
 /* Destroy the given window */
 gae_graphics_window_t* gae_graphics_window_destroy(gae_graphics_window_t* window);
 
