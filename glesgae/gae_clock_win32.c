@@ -9,6 +9,7 @@
 
 #include <stdlib.h>
 #include <time.h>
+#if defined(WINDOWS)
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
@@ -142,3 +143,4 @@ gae_clock_t* gae_clock_resume(gae_clock_t* clock) {
 double getCurrentTime(const struct timespec* time) {
   return ((double)(time->tv_sec) + (double)(time->tv_nsec * 0.000000001));
 }
+#endif
