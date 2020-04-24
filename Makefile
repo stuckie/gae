@@ -1,7 +1,7 @@
 LIBS = -lm
 #CFLAGS   = -O3 -Wall -Werror -Wpedantic -Wno-variadic-macros -Wcast-align -Wredundant-decls -Wextra -std=c89 -pedantic -pedantic-errors -mtune=native `sdl2-config --cflags` -Iglesgae
 #LDFLAGS  = -O3 `sdl2-config --libs`
-CFLAGS   = -g -Wall -Werror -Wpedantic -Wno-variadic-macros -Wcast-align -Wredundant-decls -Wextra -std=c89 -pedantic -pedantic-errors -mtune=native `sdl2-config --cflags` -Iglesgae
+CFLAGS   = -g -Wall -Werror -Wpedantic -Wno-variadic-macros -Wcast-align -Wredundant-decls -Wextra -std=c89 -pedantic -pedantic-errors -mtune=native `sdl2-config --cflags` -Iglesgae -DSDL2 -DLINUX
 LDFLAGS  = -g `sdl2-config --libs`
 
 GLESGAE_OBJS = .objs/glesgae
