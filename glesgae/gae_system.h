@@ -21,4 +21,10 @@ extern gae_system_t gae_system;
 
 void gae_system_delay(unsigned int ms);
 
+#if defined(WINDOWS)
+	#define gae_main(argc, argv) SDL_main(argc, argv)
+#else
+	#define gae_main(argc, argv) main(argc, argv)
+#endif
+
 #endif

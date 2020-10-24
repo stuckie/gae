@@ -1,6 +1,8 @@
 #include "gae_clock.h"
 #include "gae_memory.h"
 
+#if !defined(WINDOWS)
+
 #if __STDC_VERSION__ >= 199901L
 #define _XOPEN_SOURCE 600
 #else
@@ -109,3 +111,5 @@ gae_clock_t* gae_clock_resume(gae_clock_t* clock) {
 double getCurrentTime(const struct timespec* time) {
   return ((double)(time->tv_sec) + (double)(time->tv_nsec * 0.000000001));
 }
+
+#endif

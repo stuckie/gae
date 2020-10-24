@@ -99,6 +99,12 @@
     <ClCompile Include="..\glesgae\gae_file_sdl2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\glesgae\gae_file_stdio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\glesgae\gae_clock_linux.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\glesgae\gae.h">

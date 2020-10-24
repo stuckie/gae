@@ -23,12 +23,20 @@
     <ClCompile Include="..\glesgae\gae_buffer.c" />
     <ClCompile Include="..\glesgae\gae_button.c" />
     <ClCompile Include="..\glesgae\gae_camera.c" />
+    <ClCompile Include="..\glesgae\gae_clock_linux.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\glesgae\gae_clock_win32.c" />
     <ClCompile Include="..\glesgae\gae_colour.c" />
     <ClCompile Include="..\glesgae\gae_dlist.c" />
     <ClCompile Include="..\glesgae\gae_events.c" />
     <ClCompile Include="..\glesgae\gae_events_sdl2.c" />
     <ClCompile Include="..\glesgae\gae_file_sdl2.c" />
+    <ClCompile Include="..\glesgae\gae_file_stdio.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\glesgae\gae_font.c" />
     <ClCompile Include="..\glesgae\gae_graphics_sdl2.c" />
     <ClCompile Include="..\glesgae\gae_grid.c" />
@@ -139,13 +147,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Source\SDL2-devel-2.0.12-VC\SDL2-2.0.12\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>../external/SDL2/include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>../external/SDL2/include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -202,7 +211,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINDOWS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>

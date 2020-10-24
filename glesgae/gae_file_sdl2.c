@@ -1,7 +1,6 @@
 #include "gae_file.h"
 #include "gae_memory.h"
 
-#if defined(SDL2)
 #include "SDL2/SDL.h"
 
 typedef struct gae_file_stdio_s {
@@ -148,5 +147,3 @@ gae_file_t* gae_file_destroy(gae_file_t* file)
 	gae_free(file->platform);
 	return file;
 }
-#endif
-
