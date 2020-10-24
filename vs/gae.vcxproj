@@ -28,7 +28,7 @@
     <ClCompile Include="..\glesgae\gae_dlist.c" />
     <ClCompile Include="..\glesgae\gae_events.c" />
     <ClCompile Include="..\glesgae\gae_events_sdl2.c" />
-    <ClCompile Include="..\glesgae\gae_file.c" />
+    <ClCompile Include="..\glesgae\gae_file_sdl2.c" />
     <ClCompile Include="..\glesgae\gae_font.c" />
     <ClCompile Include="..\glesgae\gae_graphics_sdl2.c" />
     <ClCompile Include="..\glesgae\gae_grid.c" />

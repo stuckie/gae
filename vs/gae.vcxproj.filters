@@ -39,9 +39,6 @@
     <ClCompile Include="..\glesgae\gae_events_sdl2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\glesgae\gae_file.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\glesgae\gae_font.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -97,6 +94,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\glesgae\gae_clock_win32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\glesgae\gae_file_sdl2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
