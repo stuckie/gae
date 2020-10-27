@@ -6,13 +6,13 @@ LDFLAGS  = -g `sdl2-config --libs`
 
 GLESGAE_OBJS = .objs/glesgae
 
-TARGETS	 = builddir glesgae.a bin/windowtest bin/filestest bin/buttontest bin/nineslicetest bin/menutest
+TARGETS	 = builddir glesgae.a bin/arraytest bin/windowtest bin/filestest bin/buttontest bin/nineslicetest bin/menutest
 
 .PHONY: all
 all: $(TARGETS)
 
 .PHONY: tests
-tests: bin/windowtest bin/filestest bin/buttontest bin/nineslicetest bin/menutest
+tests: bin/arraytest bin/windowtest bin/filestest bin/buttontest bin/nineslicetest bin/menutest
 
 .PHONY: builddir
 builddir:
@@ -23,6 +23,9 @@ $(GLESGAE_OBJS)/%.o: glesgae/%.c
 
 glesgae.a: $(patsubst glesgae/%.c,$(GLESGAE_OBJS)/%.o,$(wildcard glesgae/*.c))
 	ar -r -o $@ $^
+
+bin/arraytest: glesgae.a tests/array.c
+	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS) ${LIBS} glesgae.a
 
 bin/windowtest: glesgae.a tests/window.c
 	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS) ${LIBS} glesgae.a

@@ -45,6 +45,7 @@ static void testBuffer()
 	gae_file_init(&testFile, GAE_FILE_MODE_READ, GAE_FILE_TYPE_ASCII);
 	gae_file_open(&testFile, testText);
 	gae_buffer_from_file(&testBuffer, &testFile);
+	gae_file_close(&testFile);
 	gae_file_destroy(&testFile);
 	
 	if (0 != strcmp((char*)testBuffer.data, testString))
@@ -58,6 +59,7 @@ static void testBuffer()
 	gae_file_init(&testFile, GAE_FILE_MODE_WRITE, GAE_FILE_TYPE_BINARY);
 	gae_file_open(&testFile, testText);
 	gae_file_write(&testFile, testBuffer.length, testBuffer.data);
+	gae_file_close(&testFile);
 	gae_file_destroy(&testFile);
 	gae_buffer_destroy(&testBuffer);
 }

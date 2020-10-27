@@ -133,7 +133,7 @@ unsigned long gae_file_length(gae_file_t* file)
 gae_file_t* gae_file_close(gae_file_t* file)
 {
 	gae_file_sdl2_t* platform = file->platform;
-	if (GAE_FILE_NO_ERROR != file->status) return file;
+	if (GAE_FILE_CLOSED == file->status) return file;
 	
 	SDL_RWclose(platform->file);
 	file->status = GAE_FILE_CLOSED;
