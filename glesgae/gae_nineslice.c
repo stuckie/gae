@@ -113,10 +113,10 @@ gae_nineslice_t* gae_nineslice_render(gae_nineslice_t* const nineslice)
 	
 	for (i = 0; i < gae_nineslice_count; ++i) {
 		gae_rect_t pos = nineslice->dst;
-		pos.x += nineslice->dimensions[i].x * nineslice->scale.x;
-		pos.y += nineslice->dimensions[i].y * nineslice->scale.y;
-		pos.w = nineslice->dimensions[i].w * nineslice->scale.x;
-		pos.h = nineslice->dimensions[i].h * nineslice->scale.y;
+		pos.x += (int)(nineslice->dimensions[i].x * nineslice->scale.x);
+		pos.y += (int)(nineslice->dimensions[i].y * nineslice->scale.y);
+		pos.w = (int)(nineslice->dimensions[i].w * nineslice->scale.x);
+		pos.h = (int)(nineslice->dimensions[i].h * nineslice->scale.y);
 		gae_graphics_context_blit_texture(gae_system.graphics.context, nineslice->texture, &(nineslice->frames[i].src), &pos);
 	}
 	
@@ -125,8 +125,8 @@ gae_nineslice_t* gae_nineslice_render(gae_nineslice_t* const nineslice)
 
 gae_nineslice_t* gae_nineslice_rescale(gae_nineslice_t* nineslice, unsigned int width, unsigned int height)
 {
-	nineslice->scale.x = width / nineslice->dst.w;
-	nineslice->scale.y = height / nineslice->dst.h;
+	nineslice->scale.x = (float)(width / nineslice->dst.w);
+	nineslice->scale.y = (float)(height / nineslice->dst.h);
 	
 	return nineslice;
 }

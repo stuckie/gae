@@ -5,7 +5,7 @@
 /* Create a font based on the given texture, and a string of definitions matching the layout of the font. IE: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" */
 gae_font_t* gae_font_init(gae_font_t* font, unsigned int width, unsigned int height, gae_graphics_texture_t* const texture, const char* definitions)
 {
-	const unsigned long chars = strlen(definitions);
+	const size_t chars = strlen(definitions);
 	unsigned long i = 0;
 	gae_map_t* lookups = &(font->lookup);
 	font->texture = texture;
@@ -31,7 +31,7 @@ gae_font_t* gae_font_init(gae_font_t* font, unsigned int width, unsigned int hei
 /* Create a font based on the given texture, a string of definitions matching the order of the given array of rects describing the positions on the texture */
 gae_font_t* gae_font_init_with_sizes(gae_font_t* font, gae_graphics_texture_t* const texture, const char* definitions, const gae_rect_t* const sizeArray)
 {
-	const unsigned long chars = strlen(definitions);
+	const size_t chars = strlen(definitions);
 	unsigned long i = 0;
 	gae_map_t* lookups = &(font->lookup);
 	font->texture = texture;
@@ -64,7 +64,7 @@ gae_font_t* gae_font_setColour(gae_font_t* font, gae_colour_rgba* const colour)
 /* Write a string based on this font directly to the screen at the given x, y coords */
 gae_font_t* gae_font_writeText(gae_font_t* font, const char* string, const unsigned int x, const unsigned int y, const unsigned int spacing)
 {
-	const unsigned long chars = strlen(string);
+	const size_t chars = strlen(string);
 	unsigned long i = 0;
 	gae_rect_t dst;
 	dst.x = x; dst.y = y; 

@@ -101,8 +101,8 @@ gae_graphics_context_t* gae_graphics_context_blit_texture_params(gae_graphics_co
 {
 	SDL_Point p;
 	if (0 != params->origin) {
-		p.x = params->origin->x;
-		p.y = params->origin->y;
+		p.x = (int)params->origin->x;
+		p.y = (int)params->origin->y;
 	} else { p.x = p.y = 0; }
 	
 	SDL_RenderCopyEx(context->data, params->texture->data, (SDL_Rect*)(params->srcRect), (SDL_Rect*)(params->dstRect), params->degrees, &p, SDL_FLIP_NONE);
@@ -133,14 +133,14 @@ gae_graphics_context_t* gae_graphics_context_get_draw_colour(gae_graphics_contex
 
 gae_graphics_context_t* gae_graphics_context_draw_point(gae_graphics_context_t* const context, gae_point_2d_t* const p)
 {
-	SDL_RenderDrawPoint(context->data, p->x, p->y);
+	SDL_RenderDrawPoint(context->data, (int)p->x, (int)p->y);
 	
 	return context;
 }
 
 gae_graphics_context_t* gae_graphics_context_draw_line(gae_graphics_context_t* const context, gae_point_2d_t* const a, gae_point_2d_t* const b)
 {
-	SDL_RenderDrawLine(context->data, a->x, a->y, b->x, b->y);
+	SDL_RenderDrawLine(context->data, (int)a->x, (int)a->y, (int)b->x, (int)b->y);
 	
 	return context;
 }

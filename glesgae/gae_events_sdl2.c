@@ -55,8 +55,8 @@ gae_event_system_t* gae_event_system_update(gae_event_system_t* const system)
 					gae_event_t gaeEvent;
 					int width = gae_system.graphics.window->w;
 					int height = gae_system.graphics.window->h;
-					buttonEvent.x = event.tfinger.x * width;
-					buttonEvent.y = event.tfinger.y * height;
+					buttonEvent.x = (unsigned int)event.tfinger.x * width;
+					buttonEvent.y = (unsigned int)event.tfinger.y * height;
 					buttonEvent.buttonId = 0; 
 					buttonEvent.isDown = 0;
 					gaeEvent.type = GAE_EVENT_MOUSE_BUTTON; 
@@ -71,8 +71,8 @@ gae_event_system_t* gae_event_system_update(gae_event_system_t* const system)
 					gae_event_t gaeEvent;
 					int width = gae_system.graphics.window->w;
 					int height = gae_system.graphics.window->h;
-					buttonEvent.x = event.tfinger.x * width;
-					buttonEvent.y = event.tfinger.y * height;
+					buttonEvent.x = (unsigned int)event.tfinger.x * width;
+					buttonEvent.y = (unsigned int)event.tfinger.y * height;
 					buttonEvent.buttonId = 0;
 					buttonEvent.isDown = 1;
 					gaeEvent.type = GAE_EVENT_MOUSE_BUTTON; 
@@ -87,8 +87,8 @@ gae_event_system_t* gae_event_system_update(gae_event_system_t* const system)
 					gae_event_t gaeEvent;
 					int width = gae_system.graphics.window->w;
 					int height = gae_system.graphics.window->h;
-					moveEvent.x = event.tfinger.x * width;
-					moveEvent.y = event.tfinger.y * height;
+					moveEvent.x = (unsigned int)event.tfinger.x * width;
+					moveEvent.y = (unsigned int)event.tfinger.y * height;
 					gaeEvent.type = GAE_EVENT_MOUSE_MOVE;
 					gaeEvent.event = &moveEvent;
 					(*system->onMouseEvent)(system->userDatum, &gaeEvent);
