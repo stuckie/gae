@@ -110,7 +110,7 @@ static void testJS()
 static void testJS2()
 {
 	gae_json_document_t jsDoc;
-	gae_json_document_init(&jsDoc, "Duck.gltf");
+	gae_json_document_init(&jsDoc, "data/Duck.gltf");
 	gae_json_document_parse(&jsDoc);
 	
 	print_node(&jsDoc, jsDoc.root, 0);
