@@ -19,14 +19,19 @@ typedef struct gae_buffer_s {
 	unsigned long length;
 } gae_buffer_t;
 
+/* Initialise a buffer object */
 gae_buffer_t* gae_buffer_init(gae_buffer_t* buffer, enum gae_buffer_type type, unsigned int size);
 
+/* Create a buffer from a file */
 gae_buffer_t* gae_buffer_from_file(gae_buffer_t* buffer, struct gae_file_s* file);
 
+/* Read from the buffer */
 gae_buffer_t* gae_buffer_read(gae_buffer_t* buffer, unsigned int size, void* data);
 
+/* Write to the buffer */
 gae_buffer_t* gae_buffer_write(gae_buffer_t* buffer, unsigned int size, void* data);
 
+/* Destroy the buffer object */
 gae_buffer_t* gae_buffer_destroy(gae_buffer_t* buffer);
 
 #endif

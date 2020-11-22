@@ -14,7 +14,7 @@ gae_grid_t* gae_grid_init(gae_grid_t* grid, unsigned int columns, unsigned int r
 	return grid;
 }
 
-gae_grid_cell_t* gae_grid_cell_at(gae_grid_t* const grid, gae_grid_cell_position_t* position)
+gae_grid_cell_t* gae_grid_cell_at(gae_grid_t* const grid, gae_grid_cell_position_t* const position)
 {
 	return grid->cells + (position->y * grid->columns + position->x);
 }
