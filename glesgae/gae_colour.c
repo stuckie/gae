@@ -10,9 +10,9 @@ gae_colour_rgba gae_colour_hsv_to_rgb(gae_colour_hsv in)
     out.r = 255; out.g = 255; out.b = 255; out.a = 255;
 	
 	if (0 == in.s) {
-		out.r = in.v * 255;
-		out.g = in.v * 255;
-		out.b = in.v * 255;
+		out.r = (gae_byte)(in.v * 255);
+		out.g = (gae_byte)(in.v * 255);
+		out.b = (gae_byte)(in.v * 255);
 
 		return out;
 	}
@@ -22,40 +22,40 @@ gae_colour_rgba gae_colour_hsv_to_rgb(gae_colour_hsv in)
 	hh /= 60;
 	i = (long)hh;
 	ff = hh - i;
-	p = in.v * (1.0 - in.s);
-	q = in.v * (1.0 - (in.s * ff));
-	t = in.v * (1.0 - (in.s * (1.0 - ff)));
+	p = in.v * (1.0F - in.s);
+	q = in.v * (1.0F - (in.s * ff));
+	t = in.v * (1.0F - (in.s * (1.0F - ff)));
 	
 	switch (i) {
 		case 0:
-			out.r = in.v * 255;
-			out.g = t * 255;
-			out.b = p * 255;
+			out.r = (gae_byte)(in.v * 255);
+			out.g = (gae_byte)(t * 255);
+			out.b = (gae_byte)(p * 255);
 		break;
 		case 1:
-			out.r = q * 255;
-			out.g = in.v * 255;
-			out.b = p * 255;
+			out.r = (gae_byte)(q * 255);
+			out.g = (gae_byte)(in.v * 255);
+			out.b = (gae_byte)(p * 255);
 		break;
 		case 2:
-			out.r = p * 255;
-			out.g = in.v * 255;
-			out.b = t * 255;
+			out.r = (gae_byte)(p * 255);
+			out.g = (gae_byte)(in.v * 255);
+			out.b = (gae_byte)(t * 255);
 		break;
 		case 3:
-			out.r = p * 255;
-			out.g = q * 255;
-			out.b = in.v * 255;
+			out.r = (gae_byte)(p * 255);
+			out.g = (gae_byte)(q * 255);
+			out.b = (gae_byte)(in.v * 255);
 		break;
 		case 4:
-			out.r = t * 255;
-			out.g = p * 255;
-			out.b = in.v * 255;
+			out.r = (gae_byte)(t * 255);
+			out.g = (gae_byte)(p * 255);
+			out.b = (gae_byte)(in.v * 255);
 		break;
 		case 5:
-			out.r = in.v * 255;
-			out.g = p * 255;
-			out.b = q * 255;
+			out.r = (gae_byte)(in.v * 255);
+			out.g = (gae_byte)(p * 255);
+			out.b = (gae_byte)(q * 255);
 		break;
 	}
 	
@@ -67,9 +67,9 @@ gae_colour_hsv gae_colour_rgb_to_hsv(gae_colour_rgba in)
 {
 	gae_colour_hsv out;
 	float min, max, delta;
-	float r = in.r / 255.0;
-	float g = in.g / 255.0;
-	float b = in.b / 255.0;
+	float r = in.r / 255.0F;
+	float g = in.g / 255.0F;
+	float b = in.b / 255.0F;
 
 	min = r < g ? r : g;
 	min = min < b ? min : b;
@@ -97,9 +97,9 @@ gae_colour_hsv gae_colour_rgb_to_hsv(gae_colour_rgba in)
 	if (in.r == max)
 		out.h = (in.g - in.b) / delta;
 	else if (in.g == max)
-		out.h = 2.0 + (in.b - in.r) / delta;
+		out.h = 2.0F + (in.b - in.r) / delta;
 	else
-		out.h = 4.0 + (in.r - in.g) / delta;
+		out.h = 4.0F + (in.r - in.g) / delta;
 
 	out.h *= 60;
 

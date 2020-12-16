@@ -21,7 +21,7 @@ int gae_point2d_in_rectangle(gae_point_2d_t point, gae_rect_t rect)
 
 double gae_point2d_angle_between(gae_point_2d_t* const a, gae_point_2d_t* const b)
 {
-	return atan2(a->y - b->y, a->x - b->x);
+	return atan2((double)a->y - b->y, (double)a->x - b->x);
 }
 
 gae_point_2d_t gae_point2d_rotate(gae_point_2d_t* const origin, float radians, gae_point_2d_t* const p)

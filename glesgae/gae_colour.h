@@ -16,9 +16,9 @@ typedef struct gae_colour_rgba_s {
 #define gae_colour_rgba_set_black(colour) { colour.r = 0; colour.g = 0; colour.b = 0; colour.a = 255; }
 
 typedef struct gae_colour_hsv_s {
-	double h; /* 0 - 360 */
-	double s; /* 0 - 1.0 */
-	double v; /* 0 - 1.0 */
+	float h; /* 0 - 360 */
+	float s; /* 0 - 1.0 */
+	float v; /* 0 - 1.0 */
 } gae_colour_hsv;
 
 gae_colour_rgba gae_colour_hsv_to_rgb(gae_colour_hsv hsv);
