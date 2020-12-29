@@ -176,7 +176,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin\SDL2.dll</Command>
+      <Command>copy $(ProjectDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin\SDL2.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -195,7 +195,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin\SDL2.dll</Command>
+      <Command>copy $(ProjectDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin\SDL2.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -218,7 +218,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin\SDL2.dll</Command>
+      <Command>copy $(ProjectDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin\SDL2.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -241,7 +241,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin\SDL2.dll</Command>
+      <Command>copy $(ProjectDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin\SDL2.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
