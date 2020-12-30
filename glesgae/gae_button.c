@@ -22,7 +22,6 @@ gae_button_t* gae_button_init(gae_button_t* button, gae_button_renderable_t* con
 gae_button_t* gae_button_update(gae_button_t* button, gae_point_2d_t* const cursor, int isClicked)
 {
 	enum gae_button_state lastState = button->state;
-	gae_button_renderable_t frame = button->graphics[button->state];
 	
 	if (gae_button_inactive != button->state) {
 		if (0 != gae_point2d_in_rectangle(*cursor, button->dims))
@@ -43,8 +42,16 @@ gae_button_t* gae_button_update(gae_button_t* button, gae_point_2d_t* const curs
 		}
 	}
 	
+	return button;
+}
+
+gae_button_t* gae_button_render(gae_button_t* button)
+{
+	enum gae_button_state lastState = button->state;
+	gae_button_renderable_t frame = button->graphics[button->state];
+
 	(*frame.onRender)(frame.data);
-	
+
 	return button;
 }
 

@@ -36,6 +36,7 @@ typedef struct gae_button_s {
 
 gae_button_t* gae_button_init(gae_button_t* button, gae_button_renderable_t* const graphics, gae_rect_t* const dims, void* userData);
 gae_button_t* gae_button_update(gae_button_t* button, gae_point_2d_t* const cursor, int isClicked);
+gae_button_t* gae_button_render(gae_button_t* button);
 gae_button_t* gae_button_destroy(gae_button_t* button);
 
 gae_button_renderable_t* gae_button_create_sprite(gae_button_t* const button, gae_button_renderable_t* renderable, struct gae_frame_s* const frame);
