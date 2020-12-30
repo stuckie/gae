@@ -102,6 +102,12 @@
     <ClCompile Include="..\glesgae\gae_file_stdio.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\glesgae\gae_audio_system_sdl2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\glesgae\gae_clock_linux.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\glesgae\gae.h">
@@ -195,6 +201,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\glesgae\gae_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\glesgae\gae_audio_system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

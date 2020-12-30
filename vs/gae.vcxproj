@@ -20,9 +20,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\glesgae\gae_array.c" />
+    <ClCompile Include="..\glesgae\gae_audio_system_sdl2.c" />
     <ClCompile Include="..\glesgae\gae_buffer.c" />
     <ClCompile Include="..\glesgae\gae_button.c" />
     <ClCompile Include="..\glesgae\gae_camera.c" />
+    <ClCompile Include="..\glesgae\gae_clock_linux.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\glesgae\gae_clock_win32.c" />
     <ClCompile Include="..\glesgae\gae_colour.c" />
     <ClCompile Include="..\glesgae\gae_dlist.c" />
@@ -32,6 +39,8 @@
     <ClCompile Include="..\glesgae\gae_file_stdio.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\glesgae\gae_font.c" />
     <ClCompile Include="..\glesgae\gae_graphics_sdl2.c" />
@@ -55,6 +64,7 @@
   <ItemGroup>
     <ClInclude Include="..\glesgae\gae.h" />
     <ClInclude Include="..\glesgae\gae_array.h" />
+    <ClInclude Include="..\glesgae\gae_audio_system.h" />
     <ClInclude Include="..\glesgae\gae_buffer.h" />
     <ClInclude Include="..\glesgae\gae_button.h" />
     <ClInclude Include="..\glesgae\gae_camera.h" />
@@ -176,7 +186,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin\SDL2.dll</Command>
+      <Command>copy $(ProjectDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin
+copy $(ProjectDir)..\external\SDL2_image\lib\$(PlatformTarget)\*.dll $(SolutionDir)..\bin
+copy $(ProjectDir)..\external\SDL2_mixer\lib\$(PlatformTarget)\*.dll $(SolutionDir)..\bin</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -195,7 +207,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin\SDL2.dll</Command>
+      <Command>copy $(ProjectDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin
+copy $(ProjectDir)..\external\SDL2_image\lib\$(PlatformTarget)\*.dll $(SolutionDir)..\bin
+copy $(ProjectDir)..\external\SDL2_mixer\lib\$(PlatformTarget)\*.dll $(SolutionDir)..\bin</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -218,7 +232,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin\SDL2.dll</Command>
+      <Command>copy $(ProjectDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin
+copy $(ProjectDir)..\external\SDL2_image\lib\$(PlatformTarget)\*.dll $(SolutionDir)..\bin
+copy $(ProjectDir)..\external\SDL2_mixer\lib\$(PlatformTarget)\*.dll $(SolutionDir)..\bin</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -241,7 +257,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin\SDL2.dll</Command>
+      <Command>copy $(ProjectDir)..\external\SDL2\lib\$(PlatformTarget)\SDL2.dll $(SolutionDir)..\bin
+copy $(ProjectDir)..\external\SDL2_image\lib\$(PlatformTarget)\*.dll $(SolutionDir)..\bin
+copy $(ProjectDir)..\external\SDL2_mixer\lib\$(PlatformTarget)\*.dll $(SolutionDir)..\bin</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
