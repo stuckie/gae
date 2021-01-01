@@ -47,7 +47,6 @@ gae_button_t* gae_button_update(gae_button_t* button, gae_point_2d_t* const curs
 
 gae_button_t* gae_button_render(gae_button_t* button)
 {
-	enum gae_button_state lastState = button->state;
 	gae_button_renderable_t frame = button->graphics[button->state];
 
 	(*frame.onRender)(frame.data);
