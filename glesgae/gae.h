@@ -21,6 +21,7 @@
 #include "gae_stack.h"
 
 /* Sub Systems */
+#include "gae_audio_system.h"
 #include "gae_events.h"
 #include "gae_graphics.h"
 #include "gae_timer.h"

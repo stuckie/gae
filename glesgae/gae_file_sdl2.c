@@ -1,14 +1,7 @@
-#include "gae_file.h"
+#include "gae_file_sdl2.h"
 #include "gae_memory.h"
 
 #include "SDL2/SDL.h"
-
-typedef struct gae_file_sdl2_s {
-	SDL_RWops* file;
-	
-	Sint64 pos;
-	Sint64 length;
-} gae_file_sdl2_t;
 
 gae_file_t* gae_file_init(gae_file_t* file, enum gae_file_mode_e mode, enum gae_file_type_e type)
 {

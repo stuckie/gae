@@ -73,6 +73,7 @@
     <ClInclude Include="..\glesgae\gae_dlist.h" />
     <ClInclude Include="..\glesgae\gae_events.h" />
     <ClInclude Include="..\glesgae\gae_file.h" />
+    <ClInclude Include="..\glesgae\gae_file_sdl2.h" />
     <ClInclude Include="..\glesgae\gae_font.h" />
     <ClInclude Include="..\glesgae\gae_graphics.h" />
     <ClInclude Include="..\glesgae\gae_graphics_sdl2.h" />

@@ -1,6 +1,7 @@
 #ifndef _GAE_SYSTEM_H_
 #define _GAE_SYSTEM_H_
 
+struct gae_audio_system_s;
 struct gae_event_system_s;
 struct gae_graphics_context_s;
 struct gae_graphics_window_s;
@@ -14,6 +15,7 @@ typedef struct gae_graphics_s {
 typedef struct gae_system_s {
 	gae_graphics_t graphics;
 	struct gae_event_system_s* event_system;
+	struct gae_audio_system_s* audio_system;
 	struct gae_clock_s* main_clock;
 } gae_system_t;
 
