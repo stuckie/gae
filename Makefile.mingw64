@@ -1,0 +1,54 @@
+CC = x86_64-w64-mingw32-gcc
+LD = x86_64-w64-mingw32-ld
+AR = x86_64-w64-mingw32-ar
+LIBS = -lm -lmingw32 -lSDL2main -lSDL2
+CFLAGS   = -O3 -Wall -Werror -Wpedantic -Wno-variadic-macros -Wcast-align -Wredundant-decls -Wextra -std=c89 -pedantic -pedantic-errors -mtune=generic -Iglesgae -DSDL2 -DWINDOWS -DMINGW -I/usr/local/x86_64-w64-mingw32/include
+LDFLAGS  = -O3 -mwindows -L/usr/local/x86_64-w64-mingw32/lib
+#CFLAGS   = -g -Wall -Werror -Wpedantic -Wno-variadic-macros -Wcast-align -Wredundant-decls -Wextra -std=c89 -pedantic -pedantic-errors -mtune=generic -Iglesgae -DSDL2 -DWINDOWS -DMINGW -I/usr/local/x86_64-w64-mingw32/include
+#LDFLAGS  = -g -mwindows -L/usr/local/x86_64-w64-mingw32/lib
+
+GLESGAE_OBJS = .objs/glesgae
+
+TARGETS	 = builddir glesgae.a bin/arraytest bin/windowtest bin/filestest bin/buttontest bin/nineslicetest bin/menutest bin/spritetest
+
+.PHONY: all
+all: $(TARGETS)
+
+.PHONY: tests
+tests: bin/arraytest bin/windowtest bin/filestest bin/buttontest bin/nineslicetest bin/menutest bin/spritetest
+
+.PHONY: builddir
+builddir:
+	@mkdir -p $(GLESGAE_OBJS) || true
+
+$(GLESGAE_OBJS)/%.o: glesgae/%.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+glesgae.a: $(patsubst glesgae/%.c,$(GLESGAE_OBJS)/%.o,$(wildcard glesgae/*.c))
+	$(AR) -r -o $@ $^
+
+bin/arraytest: glesgae.a tests/array.c
+	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS) glesgae.a ${LIBS}
+
+bin/windowtest: glesgae.a tests/window.c
+	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS) glesgae.a ${LIBS}
+
+bin/filestest: glesgae.a tests/file.c
+	$(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} glesgae.a ${LIBS}
+
+bin/buttontest: glesgae.a tests/button.c
+	$(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} glesgae.a ${LIBS}
+
+bin/nineslicetest: glesgae.a tests/nineslice.c
+	$(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} glesgae.a ${LIBS}
+
+bin/menutest: glesgae.a tests/menutest.c
+	$(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} glesgae.a ${LIBS}
+
+bin/spritetest: glesgae.a tests/spritetest.c
+	$(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} glesgae.a ${LIBS}
+
+.PHONY: clean
+clean:
+	@rm -rf $(GLESGAE_OBJS) >/dev/null || true
+	@rm -f glesgae.a
