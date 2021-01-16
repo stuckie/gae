@@ -40,7 +40,9 @@ typedef struct gae_audio_sound_s {
 #define GAE_AUDIO_DEFAULT_CHANNELS 2
 #define GAE_AUDIO_DEFAULT_BUFFERSIZE 512
 
-/* Initialise a new audio system with the given settings */
+struct gae_buffer_s;
+struct gae_file_s;
+
 gae_audio_system_t* gae_audio_system_init(gae_audio_system_t* system, int frequencyHz, enum gae_audio_format format, int channels, int bufferSize);
 
 /* Load a sound from the given path */

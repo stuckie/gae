@@ -11,7 +11,7 @@
 #include <time.h>
 #if defined(WINDOWS)
 #define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+#include <windows.h>
 
 typedef struct gae_clock_win32_s {
 	double startTime;
@@ -20,13 +20,17 @@ typedef struct gae_clock_win32_s {
 	double pausedTime;
 } gae_clock_win32_t;
 
-#define MS_PER_SEC      1000ULL     // MS = milliseconds
-#define US_PER_MS       1000ULL     // US = microseconds
-#define HNS_PER_US      10ULL       // HNS = hundred-nanoseconds (e.g., 1 hns = 100 ns)
+#if defined(MINGW)
+#pragma GCC diagnostic ignored "-Wlong-long"
+#endif
+
+#define MS_PER_SEC      1000ULL     /* MS = milliseconds */
+#define US_PER_MS       1000ULL     /* US = microseconds */
+#define HNS_PER_US      10ULL       /* HNS = hundred-nanoseconds (e.g., 1 hns = 100 ns) */
 #define NS_PER_US       1000ULL
 
 #define HNS_PER_SEC     (MS_PER_SEC * US_PER_MS * HNS_PER_US)
-#define NS_PER_HNS      (100ULL)    // NS = nanoseconds
+#define NS_PER_HNS      (100ULL)    /* NS = nanoseconds */
 #define NS_PER_SEC      (MS_PER_SEC * US_PER_MS * NS_PER_US)
 
 int clock_gettime_monotonic(struct timespec* tv)
@@ -38,7 +42,7 @@ int clock_gettime_monotonic(struct timespec* tv)
 	if (!ticksPerSec.QuadPart) {
 		QueryPerformanceFrequency(&ticksPerSec);
 		if (!ticksPerSec.QuadPart) {
-			errno = ENOTSUP;
+			/*errno = ENOTSUP;*/
 			return -1;
 		}
 	}
