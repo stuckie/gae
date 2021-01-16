@@ -83,14 +83,14 @@ gae_array_t* gae_array_delete(gae_array_t* array, unsigned int index)
 	return array;
 }
 
-gae_array_t* gae_array_foreach(gae_array_t* array, gae_array_foreach_t foreach)
+gae_array_t* gae_array_foreach(gae_array_t* array, gae_array_foreach_t foreach, void* userData)
 {
 	unsigned int i;
 	unsigned int count = gae_array_length(array);
 	
 	for (i = 0; i < count; ++i) {
 		void* itr = array->data + (i * array->size);
-		(*foreach)(itr);
+		(*foreach)(itr, userData);
 	}
 	
 	return array;

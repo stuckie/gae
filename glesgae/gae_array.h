@@ -6,12 +6,13 @@
 typedef struct gae_array_s {
 	gae_byte* data;				/* array data */
 	
-	unsigned int allocated;		/* how big data is */
+	unsigned int allocated;		/* how big the data is */
 	unsigned int used;			/* how much data is used */
 	unsigned int size;			/* size of each element */
 } gae_array_t;
 
-typedef void (*gae_array_foreach_t)(void* data);
+/* Signature for foreach callback */
+typedef void (*gae_array_foreach_t)(void* element, void* userData);
 
 /* Initialise an array to hold elements of the given size */
 gae_array_t* gae_array_init(gae_array_t* array, unsigned int size);
@@ -28,8 +29,8 @@ gae_array_t* gae_array_set(gae_array_t* array, unsigned int index, void* const d
 /* Deletes the nth element */
 gae_array_t* gae_array_delete(gae_array_t* array, unsigned int index);
 
-/* Foreach element, perform callback */
-gae_array_t* gae_array_foreach(gae_array_t* array, gae_array_foreach_t foreach);
+/* Foreach element, perform callback and pass userdata */
+gae_array_t* gae_array_foreach(gae_array_t* array, gae_array_foreach_t foreach, void* userData);
 
 /* Get the first element */
 void* gae_array_first(gae_array_t* array);
