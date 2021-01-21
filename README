@@ -1,0 +1,8 @@
+GAE
+---
+
+A rewrite of GLESGAE in ANSI C directly targeting SDL2.
+It's designed to be simple and portable.
+
+Again, like GLESGAE, it's a personal engine for experiments.
+Use at your own peril
