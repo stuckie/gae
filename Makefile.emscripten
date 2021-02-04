@@ -1,4 +1,4 @@
-LIBS = -lm
+LIBS = -lm -s USE_SDL=2 -s USE_SDL_MIXER=2 -s USE_OGG=1 -s USE_VORBIS=1 -s USE_SDL_IMAGE=2 -s 'EXPORTED_FUNCTIONS=["_main", "_emscripten_fullscreen"]' -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall"]'
 #CFLAGS   = -O3 -Wall -Werror -Wpedantic -Wno-variadic-macros -Wcast-align -Wredundant-decls -Wextra -std=c89 -pedantic -pedantic-errors -mtune=native `sdl2-config --cflags` -Iglesgae
 #LDFLAGS  = -O3 `sdl2-config --libs`
 CFLAGS   = -g -Wall -Werror -Wpedantic -Wno-variadic-macros -Wcast-align -Wredundant-decls -Wextra -std=c89 -pedantic -pedantic-errors -mtune=native `sdl2-config --cflags` -Iglesgae -DSDL2 -DLINUX
@@ -6,13 +6,13 @@ LDFLAGS  = -g `sdl2-config --libs`
 
 GLESGAE_OBJS = .objs/glesgae
 
-TARGETS	 = builddir glesgae.a bin/windowtest bin/filestest bin/buttontest bin/nineslicetest bin/menutest
+TARGETS	 = builddir glesgae.a bin/windowtest.js bin/filestest.js bin/buttontest.js bin/nineslicetest.js bin/menutest.js
 
 .PHONY: all
 all: $(TARGETS)
 
 .PHONY: tests
-tests: bin/windowtest bin/filestest bin/buttontest bin/nineslicetest bin/menutest
+tests: bin/windowtest.js bin/filestest.js bin/buttontest.js bin/nineslicetest.js bin/menutest.js
 
 .PHONY: builddir
 builddir:
@@ -24,19 +24,19 @@ $(GLESGAE_OBJS)/%.o: glesgae/%.c
 glesgae.a: $(patsubst glesgae/%.c,$(GLESGAE_OBJS)/%.o,$(wildcard glesgae/*.c))
 	$(AR) r $@ $^
 
-bin/windowtest: glesgae.a tests/window.c
+bin/windowtest.js: glesgae.a tests/window.c
 	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS) ${LIBS} glesgae.a
 
-bin/filestest: glesgae.a tests/file.c
+bin/filestest.js: glesgae.a tests/file.c
 	$(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
 
-bin/buttontest: glesgae.a tests/button.c
+bin/buttontest.js: glesgae.a tests/button.c
 	$(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
 
-bin/nineslicetest: glesgae.a tests/nineslice.c
+bin/nineslicetest.js: glesgae.a tests/nineslice.c
 	$(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
 
-bin/menutest: glesgae.a tests/menutest.c
+bin/menutest.js: glesgae.a tests/menutest.c
 	$(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
 
 .PHONY: clean

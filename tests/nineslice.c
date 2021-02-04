@@ -3,6 +3,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#if defined(__EMSCRIPTEN__)
+#include <emscripten.h>
+#include <emscripten/html5.h>
+#include "SDL2/SDL.h"
+
+void emscripten_fullscreen()
+{
+        emscripten_request_fullscreen(NULL, EM_FALSE);
+        SDL_SetWindowFullscreen(gae_system.graphics.window->data, SDL_WINDOW_FULLSCREEN);
+        printf("Fullscreening...\n");
+}
+#endif
+
+
 static void main_loop();
 static int isRunning = 1;
 static int y = 0;
@@ -45,6 +59,8 @@ static void OnQuit(void* userDatum, gae_event_t* const event)
 {
 	(void)(userDatum);
 	(void)(event);
+
+	DestroyNineslice(&GLOBAL.nineslice);
 	
 	isRunning = 0;
 }

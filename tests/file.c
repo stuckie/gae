@@ -4,6 +4,20 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#if defined(__EMSCRIPTEN__)
+#include <emscripten.h>
+#include <emscripten/html5.h>
+#include "SDL2/SDL.h"
+
+void emscripten_fullscreen()
+{
+        emscripten_request_fullscreen(NULL, EM_FALSE);
+        SDL_SetWindowFullscreen(gae_system.graphics.window->data, SDL_WINDOW_FULLSCREEN);
+        printf("Fullscreening...\n");
+}
+#endif
+
+
 static void testFile()
 {
 	const char* testText = "test.txt";
