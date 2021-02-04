@@ -14,7 +14,7 @@
 #define gae_clamp(val, low, hi)			((val) < (low) ? (low) : (val) > (hi) ? (hi) : (val))
 
 /* pinched from stackoverflow.com/questions/13408990 */
-#define gae_rand_float(__val) (float)rand()/(float)(RAND_MAX/__val)
+#define gae_rand_float(__val) (float)rand()/(float)((float)RAND_MAX/__val)
 
 typedef unsigned char gae_byte;
 
