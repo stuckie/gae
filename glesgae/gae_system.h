@@ -19,7 +19,11 @@ typedef struct gae_system_s {
 	struct gae_clock_s* main_clock;
 } gae_system_t;
 
-gae_system_t gae_system;
+#if defined(MACOSX)
+	gae_system_t gae_system;
+#else
+	extern gae_system_t gae_system;
+#endif
 
 void gae_system_delay(unsigned int ms);
 
