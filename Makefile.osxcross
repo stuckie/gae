@@ -18,36 +18,36 @@ tests: bin/arraytest bin/windowtest bin/filestest bin/buttontest bin/nineslicete
 
 .PHONY: builddir
 builddir:
-        @mkdir -p $(GLESGAE_OBJS) || true
+	@mkdir -p $(GLESGAE_OBJS) || true
 
 $(GLESGAE_OBJS)/%.o: glesgae/%.c
-        $(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 glesgae.a: $(patsubst glesgae/%.c,$(GLESGAE_OBJS)/%.o,$(wildcard glesgae/*.c))
-        $(AR) -r $@ $^
+	$(AR) -r $@ $^
 
 bin/arraytest: glesgae.a tests/array.c
-        $(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS) ${LIBS} glesgae.a
+	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS) ${LIBS} glesgae.a
 
 bin/windowtest: glesgae.a tests/window.c
-        $(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS) ${LIBS} glesgae.a
+	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS) ${LIBS} glesgae.a
 
 bin/filestest: glesgae.a tests/file.c
-        $(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
+	$(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
 
 bin/buttontest: glesgae.a tests/button.c
-        $(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
+	$(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
 
 bin/nineslicetest: glesgae.a tests/nineslice.c
-        $(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
+	$(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
 
 bin/menutest: glesgae.a tests/menutest.c
-        $(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
+	$(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
 
 bin/spritetest: glesgae.a tests/spritetest.c
-        $(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
+	$(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
 
 .PHONY: clean
 clean:
-        @rm -rf $(GLESGAE_OBJS) >/dev/null || true
-        @rm -f glesgae.a
+	@rm -rf $(GLESGAE_OBJS) >/dev/null || true
+	@rm -f glesgae.a
