@@ -19,7 +19,7 @@ typedef struct gae_system_s {
 	struct gae_clock_s* main_clock;
 } gae_system_t;
 
-extern gae_system_t gae_system;
+gae_system_t gae_system;
 
 void gae_system_delay(unsigned int ms);
 

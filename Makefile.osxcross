@@ -1,0 +1,53 @@
+CC = o64-clang
+AR = x86_64-apple-darwin20.2-ar
+LIBS = -lm
+#CFLAGS   = -O3 -Wall -Werror -Wpedantic -Wno-variadic-macros -Wcast-align -Wredundant-decls -Wextra -std=c89 -pedantic -pedantic-errors -mtune=native -Iglesgae
+#LDFLAGS  = -O3 -lSDL2
+CFLAGS   = -g -Wall -Werror -Wpedantic -Wno-variadic-macros -Wcast-align -Wredundant-decls -Wextra -std=c89 -pedantic -pedantic-errors -mtune=native -Iglesgae -DSDL2 -DMACOSX `osxcross-macports --cflags sdl2 sdl2_image sdl2_mixer`
+LDFLAGS  = -g `omp --ldflags sdl2 sdl2_image sdl2_mixer`
+
+GLESGAE_OBJS = .objs/glesgae
+
+TARGETS  = builddir glesgae.a bin/arraytest bin/windowtest bin/filestest bin/buttontest bin/nineslicetest bin/menutest bin/spritetest
+
+.PHONY: all
+all: $(TARGETS)
+
+.PHONY: tests
+tests: bin/arraytest bin/windowtest bin/filestest bin/buttontest bin/nineslicetest bin/menutest bin/spritetest
+
+.PHONY: builddir
+builddir:
+        @mkdir -p $(GLESGAE_OBJS) || true
+
+$(GLESGAE_OBJS)/%.o: glesgae/%.c
+        $(CC) $(CFLAGS) -c -o $@ $<
+
+glesgae.a: $(patsubst glesgae/%.c,$(GLESGAE_OBJS)/%.o,$(wildcard glesgae/*.c))
+        $(AR) -r $@ $^
+
+bin/arraytest: glesgae.a tests/array.c
+        $(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS) ${LIBS} glesgae.a
+
+bin/windowtest: glesgae.a tests/window.c
+        $(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS) ${LIBS} glesgae.a
+
+bin/filestest: glesgae.a tests/file.c
+        $(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
+
+bin/buttontest: glesgae.a tests/button.c
+        $(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
+
+bin/nineslicetest: glesgae.a tests/nineslice.c
+        $(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
+
+bin/menutest: glesgae.a tests/menutest.c
+        $(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
+
+bin/spritetest: glesgae.a tests/spritetest.c
+        $(CC) $(CFLAGS) -o $@ $+ ${LDFLAGS} ${LIBS} glesgae.a
+
+.PHONY: clean
+clean:
+        @rm -rf $(GLESGAE_OBJS) >/dev/null || true
+        @rm -f glesgae.a
