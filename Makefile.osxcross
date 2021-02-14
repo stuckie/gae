@@ -1,10 +1,10 @@
 CC = o64-clang
 AR = x86_64-apple-darwin20.2-ar
 LIBS = -lm
-#CFLAGS   = -O3 -Wall -Werror -Wpedantic -Wno-variadic-macros -Wcast-align -Wredundant-decls -Wextra -std=c89 -pedantic -pedantic-errors -mtune=native -Iglesgae
-#LDFLAGS  = -O3 -lSDL2
-CFLAGS   = -g -Wall -Werror -Wpedantic -Wno-variadic-macros -Wcast-align -Wredundant-decls -Wextra -std=c89 -pedantic -pedantic-errors -mtune=native -Iglesgae -DSDL2 -DMACOSX `osxcross-macports --cflags sdl2 sdl2_image sdl2_mixer`
-LDFLAGS  = -g `omp --ldflags sdl2 sdl2_image sdl2_mixer`
+#CFLAGS   = -O3 `omp -c sdl2` -Wall -Werror -Wpedantic -Wno-variadic-macros -Wcast-align -Wredundant-decls -Wextra -std=c89 -pedantic -pedantic-errors -mtune=native -Iglesgae
+#LDFLAGS  = -O3 `omp -l sdl2` -lSDL2_mixer -lSDL2_image
+CFLAGS   = -g -Wall -Werror -Wpedantic -Wno-variadic-macros -Wcast-align -Wredundant-decls -Wextra -std=c89 -pedantic -pedantic-errors -mtune=native -Iglesgae -DSDL2 -DMACOSX `omp -c sdl2`
+LDFLAGS  = -g `omp -l sdl2` -lSDL2_image -lSDL2_mixer
 
 GLESGAE_OBJS = .objs/glesgae
 
