@@ -209,5 +209,8 @@
     <ClInclude Include="..\glesgae\gae_file_sdl2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\glesgae\gae_string.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

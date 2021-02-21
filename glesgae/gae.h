@@ -43,4 +43,7 @@
 #include "gae_point.h"
 #include "gae_rect.h"
 
+/* Utils */
+#include "gae_string.h"
+
 #endif

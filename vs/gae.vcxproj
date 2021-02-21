@@ -92,6 +92,7 @@
     <ClInclude Include="..\glesgae\gae_sprite_sheet.h" />
     <ClInclude Include="..\glesgae\gae_stack.h" />
     <ClInclude Include="..\glesgae\gae_state.h" />
+    <ClInclude Include="..\glesgae\gae_string.h" />
     <ClInclude Include="..\glesgae\gae_system.h" />
     <ClInclude Include="..\glesgae\gae_timer.h" />
     <ClInclude Include="..\glesgae\gae_types.h" />
