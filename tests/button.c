@@ -265,6 +265,11 @@ static void main_loop()
 	gae_button_update(&GLOBAL.button[1], &GLOBAL.pointer.pos, GLOBAL.pointer.isDown[GAE_MOUSE_BUTTON_RIGHT]);
 	gae_button_update(&GLOBAL.button[2], &GLOBAL.pointer.pos, GLOBAL.pointer.isDown[GAE_MOUSE_BUTTON_LEFT]);
 	gae_button_update(&GLOBAL.button[3], &GLOBAL.pointer.pos, GLOBAL.pointer.isDown[GAE_MOUSE_BUTTON_LEFT]);
+
+	gae_button_render(&GLOBAL.button[0]);
+	gae_button_render(&GLOBAL.button[1]);
+	gae_button_render(&GLOBAL.button[2]);
+	gae_button_render(&GLOBAL.button[3]);
 	
 	gae_font_writeText(&GLOBAL.font, "Hello World!@", 16, 16, 1);
 	
