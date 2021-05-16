@@ -33,12 +33,17 @@ typedef struct gae_audio_system_s {
 typedef struct gae_audio_sound_s {
 	enum gae_audio_sound_type soundType;
 	void* platformSound;
+
+	int channel;	/* current channel sound is playing on */
+	int volume;		/* current channel volume of sound */
 } gae_audio_sound_t;
 
 #define GAE_AUDIO_DEFAULT_FREQUENCY 22050
 #define GAE_AUDIO_DEFAULT_FORMAT gae_audio_s16lsb
 #define GAE_AUDIO_DEFAULT_CHANNELS 2
 #define GAE_AUDIO_DEFAULT_BUFFERSIZE 512
+
+#define GAE_AUDIO_CHANNEL_UNASSIGNED -1
 
 struct gae_buffer_s;
 struct gae_file_s;
@@ -56,6 +61,12 @@ gae_audio_sound_t* gae_audio_sound_load_from_buffer(gae_audio_sound_t* sound, st
 
 /* Play the given sound with the requested loops and channel. Set to -1 for infinite loops, and any free channel */
 gae_audio_sound_t* gae_audio_sound_play(gae_audio_sound_t* sound, int loops, int channel);
+
+/* Set the volume on the given sound on the channel it is playing on. Set to -1 to put the current volume into sound. This will effect the entire channel. */
+gae_audio_sound_t* gae_audio_sound_volume(gae_audio_sound_t* sound, int volume);
+
+/* Set the volume on the given channel. Set to -1 to return the current volume */
+int gae_audio_channel_volume(int channel, int volume);
 
 /* Destroy the given audio system */
 gae_audio_system_t* gae_audio_system_destroy(gae_audio_system_t* system);

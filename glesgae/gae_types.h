@@ -11,6 +11,7 @@
 #define gae_max(a, b)	((a) > (b) ? (a) : (b))
 
 #define gae_lerp(a, b, time)			( (a) + (time) * (float) ((b) - (a)) )
+#define gae_slerp(a, b, time)			( (1.0F - time) * a + (float) ( time * b ) )
 #define gae_clamp(val, low, hi)			((val) < (low) ? (low) : (val) > (hi) ? (hi) : (val))
 
 /* pinched from stackoverflow.com/questions/13408990 */

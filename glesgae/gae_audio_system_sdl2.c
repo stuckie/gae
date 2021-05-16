@@ -52,6 +52,8 @@ gae_audio_sound_t* gae_audio_sound_load_from_path(gae_audio_sound_t* sound, enum
 		break;
 	}
 
+	sound->channel = GAE_AUDIO_CHANNEL_UNASSIGNED;
+
 	return sound;
 }
 
@@ -78,6 +80,8 @@ gae_audio_sound_t* gae_audio_sound_load_from_file(gae_audio_sound_t* sound, enum
 		break;
 	}
 
+	sound->channel = GAE_AUDIO_CHANNEL_UNASSIGNED;
+
 	return sound;
 }
 
@@ -85,6 +89,7 @@ gae_audio_sound_t* gae_audio_sound_load_from_buffer(gae_audio_sound_t* sound, ga
 {
 	sound->platformSound = Mix_QuickLoad_RAW(buffer->data, buffer->length);
 	sound->soundType = (0 != sound->platformSound) ? gae_audio_sound_buffer : gae_audio_sound_invalid;
+	sound->channel = GAE_AUDIO_CHANNEL_UNASSIGNED;
 	return sound;
 }
 
@@ -92,21 +97,34 @@ gae_audio_sound_t* gae_audio_sound_play(gae_audio_sound_t* sound, int loops, int
 {
 	switch (sound->soundType) {
 		case gae_audio_sound_streaming: {
-			Mix_PlayMusic(sound->platformSound, loops);
+			sound->channel = Mix_PlayMusic(sound->platformSound, loops);
 		};
 		break;
 
 		case gae_audio_sound_sample:
 		case gae_audio_sound_buffer: {
-			Mix_PlayChannel(channel, sound->platformSound, loops);
+			sound->channel = Mix_PlayChannel(channel, sound->platformSound, loops);
 		};
 		break;
 
 		default:
 		break;
 	};
+	
+	gae_audio_sound_volume(sound, -1); /* -1 will just return the current volume */
 
 	return sound;
+}
+
+gae_audio_sound_t* gae_audio_sound_volume(gae_audio_sound_t* sound, int volume)
+{
+	sound->volume = Mix_Volume(sound->channel, volume);
+	return sound;
+}
+
+int gae_audio_channel_volume(int channel, int volume)
+{
+	return Mix_Volume(channel, volume);
 }
 
 gae_audio_system_t* gae_audio_system_destroy(gae_audio_system_t* system)

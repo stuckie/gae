@@ -50,4 +50,7 @@ unsigned int gae_array_length(gae_array_t* const array);
 /* Destroy the given array */
 gae_array_t* gae_array_destroy(gae_array_t* array);
 
+/* Helper macro to work out length of static array */
+#define gae_static_array_length(array) (int)( sizeof(array) / sizeof(array[0]) )
+
 #endif
