@@ -69,8 +69,8 @@ static void onUpdateWindow()
 	gae_graphics_context_set_render_target(gae_system.graphics.context, &GLOBAL.frameBuffer);
 	gae_graphics_context_clear(gae_system.graphics.context);
 
-    gae_sprite_draw(&GLOBAL.singleFrameSprite);
-    gae_sprite_anim_draw(&GLOBAL.animatedSprite1);
+	gae_sprite_draw(&GLOBAL.singleFrameSprite);
+	gae_sprite_anim_draw(&GLOBAL.animatedSprite1);
 	gae_sprite_anim_draw(&GLOBAL.animatedSprite2);
 	gae_sprite_anim_draw(&GLOBAL.animatedSprite3);
 	
@@ -240,7 +240,7 @@ static void main_loop()
 	gae_timer_update(&GLOBAL.framerate.cap, gae_system.main_clock);
 	
 #ifndef __EMSCRIPTEN__
-	gae_system_delay(gae_max(0, (unsigned int)floor(GLOBAL.framerate.ticksPerFrame - GLOBAL.framerate.cap.currentTime)));
+	gae_system_delay(gae_max(0, (int)floor(GLOBAL.framerate.ticksPerFrame - GLOBAL.framerate.cap.currentTime)));
 #endif
 
     onUpdateWindow();
