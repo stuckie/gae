@@ -174,11 +174,12 @@ static void testJS3()
 		{ \"x\" : 4, \"y\" : 10, \"w\" : 4, \"h\" : 4 }, \
 		{ \"x\" : 3, \"y\" : 20, \"w\" : 8, \"h\" : 19 }, \
 		{ \"x\" : 2, \"y\" : 30, \"w\" : 5, \"h\" : 10 }, \
+		{ \"x\" : 1, \"y\" : 40, \"w\" : 7, \"h\" : 12 }, \
 		]\
 	}";
 	gae_json_document_t jsDoc;
 	gae_json_node_t* found;
-	struct json_test_struct boxes[4];
+	struct json_test_struct boxes[5];
 	unsigned int i = 0;
 	
 	gae_buffer_init(&(jsDoc.buffer), GAE_BUFFER_FIXED, strlen(testjs) + 1);
@@ -189,12 +190,12 @@ static void testJS3()
 	found = gae_json_node_find(&jsDoc, jsDoc.root, "boxes");
 	
 	found = found->child;
-	for (i = 0; i < 4; ++i) {
+	for (i = 0; i < 5; ++i) {
 		json_to_box(&jsDoc, &boxes[i], found);
 		found = found->sibling;
 	}
 	
-	for (i = 0; i < 4; ++i)
+	for (i = 0; i < 5; ++i)
 		print_box(&boxes[i]);
 	
 	gae_json_document_destroy(&jsDoc);

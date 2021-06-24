@@ -11,9 +11,9 @@
 
 void emscripten_fullscreen()
 {
-        emscripten_request_fullscreen(NULL, EM_FALSE);
-        SDL_SetWindowFullscreen(gae_system.graphics.window->data, SDL_WINDOW_FULLSCREEN);
-        printf("Fullscreening...\n");
+	emscripten_request_fullscreen(NULL, EM_FALSE);
+	SDL_SetWindowFullscreen(gae_system.graphics.window->data, SDL_WINDOW_FULLSCREEN);
+	printf("Fullscreening...\n");
 }
 #endif
 
@@ -37,11 +37,11 @@ typedef struct tween_s {
 typedef struct global_s {
 	framerate_t framerate;
 	gae_graphics_texture_t frameBuffer;
-    gae_sprite_t singleFrameSprite;
-    gae_sprite_anim_t animatedSprite1;
+	gae_sprite_t singleFrameSprite;
+	gae_sprite_anim_t animatedSprite1;
 	gae_sprite_anim_t animatedSprite2;
 	gae_sprite_anim_t animatedSprite3;
-    gae_graphics_texture_t spriteTexture;
+	gae_graphics_texture_t spriteTexture;
 	tween_t tween1, tween2;
 } global_t;
 
@@ -88,13 +88,13 @@ static void onCloseWindow()
 
 static void setupSpriteTexture()
 {
-    gae_graphics_texture_init(&GLOBAL.spriteTexture);
-    gae_graphics_context_texture_load_from_file(gae_system.graphics.context, "data/grubs.bmp", &GLOBAL.spriteTexture);
+	gae_graphics_texture_init(&GLOBAL.spriteTexture);
+	gae_graphics_context_texture_load_from_file(gae_system.graphics.context, "data/grubs.bmp", &GLOBAL.spriteTexture);
 }
 
 static void setupSingleFrameSprite()
 {
-    gae_rect_t rect = {0, 0, 32, 32};
+	gae_rect_t rect = {0, 0, 32, 32};
 
 	gae_sprite_init(&GLOBAL.singleFrameSprite, &GLOBAL.spriteTexture, &rect);
 
@@ -167,7 +167,7 @@ static void setupAnimatedSprite3()
 
 int gae_main(int argc, char** argv)
 {
-    (void)(argc);
+	(void)(argc);
 	(void)(argv);
 
 	gae_system.main_clock = gae_clock_init(gae_alloc(sizeof(gae_clock_t)));
@@ -177,7 +177,7 @@ int gae_main(int argc, char** argv)
 	
 	gae_system.event_system = gae_event_system_init(gae_alloc(sizeof(gae_event_system_t)), &GLOBAL);
 	gae_system.event_system->onQuit = OnQuit;
-	
+
 	onOpenWindow();
 
     setupSpriteTexture();
@@ -190,7 +190,7 @@ int gae_main(int argc, char** argv)
 	while (isRunning)
 		main_loop();
 	
-    onCloseWindow();
+	onCloseWindow();
 
 	gae_event_system_destroy(gae_system.event_system);
 
@@ -217,8 +217,8 @@ static void main_loop()
 	gae_sprite_anim_update(&GLOBAL.animatedSprite2, (unsigned int)floor(GLOBAL.framerate.ticksPerFrame));
 	gae_sprite_anim_update(&GLOBAL.animatedSprite3, (unsigned int)floor(GLOBAL.framerate.ticksPerFrame));
 
-	if (GLOBAL.tween1.curY == GLOBAL.tween1.endY) { GLOBAL.tween1.endY = 0; GLOBAL.tween1.tick = 0; }
-	if (GLOBAL.tween1.curY == 0) { GLOBAL.tween1.endY = 100; GLOBAL.tween1.tick = 0; }
+	if (GLOBAL.tween1.curY >= 100 - 0.001F) { GLOBAL.tween1.endY = 0; GLOBAL.tween1.tick = 0; }
+	if (GLOBAL.tween1.curY <= 0.001F) { GLOBAL.tween1.endY = 100; GLOBAL.tween1.tick = 0; }
 	GLOBAL.tween1.tick += 0.001F;
 	GLOBAL.tween1.curX = gae_slerp(GLOBAL.tween1.curX, GLOBAL.tween1.endX, GLOBAL.tween1.tick);
 	GLOBAL.tween1.curY = gae_slerp(GLOBAL.tween1.curY, GLOBAL.tween1.endY, GLOBAL.tween1.tick);
@@ -226,8 +226,8 @@ static void main_loop()
 	GLOBAL.singleFrameSprite.dst.x = GLOBAL.tween1.curX;
 	GLOBAL.singleFrameSprite.dst.y = GLOBAL.tween1.curY;
 
-	if (GLOBAL.tween2.curY == GLOBAL.tween2.endY) { GLOBAL.tween2.endY = 0; GLOBAL.tween2.tick = 0; }
-	if (GLOBAL.tween2.curY == 0) { GLOBAL.tween2.endY = 100; GLOBAL.tween2.tick = 0; }
+	if (GLOBAL.tween2.curY >= 100 - 0.001F) { GLOBAL.tween2.endY = 0; GLOBAL.tween2.tick = 0; }
+	if (GLOBAL.tween2.curY <= 0.001F) { GLOBAL.tween2.endY = 100; GLOBAL.tween2.tick = 0; }
 	GLOBAL.tween2.tick += 0.001F;
 	GLOBAL.tween2.curX = gae_lerp(GLOBAL.tween2.curX, GLOBAL.tween2.endX, GLOBAL.tween2.tick);
 	GLOBAL.tween2.curY = gae_lerp(GLOBAL.tween2.curY, GLOBAL.tween2.endY, GLOBAL.tween2.tick);
@@ -243,5 +243,5 @@ static void main_loop()
 	gae_system_delay(gae_max(0, (int)floor(GLOBAL.framerate.ticksPerFrame - GLOBAL.framerate.cap.currentTime)));
 #endif
 
-    onUpdateWindow();
+	onUpdateWindow();
 }
